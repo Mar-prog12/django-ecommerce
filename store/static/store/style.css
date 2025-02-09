@@ -1,0 +1,297 @@
+/* --- GENERAL STYLES --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* --- HEADER STYLING --- */
+.header {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.nav-menu li {
+    display: inline-block;
+    margin: 0 15px;
+    position: relative;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-menu li a:hover {
+    color: #f1c40f;
+}
+
+/* --- DROPDOWN MENU FIX --- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    padding: 5px 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.dropdown-menu li {
+    display: block;
+    text-align: left;
+    padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 8px 15px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1c40f;
+    color: white;
+    border-radius: 5px;
+}
+
+/* --- KEEP DROPDOWN OPEN WHEN HOVERING --- */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- FOOTER STYLING --- */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* --- PRODUCT LIST STYLING --- */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* --- PRICE STYLING --- */
+.price {
+    font-size: 20px;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* --- BUTTON STYLING --- */
+.button, .cart-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #f1c40f;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover, .cart-button:hover {
+    background-color: #f39c12;
+    transform: scale(1.05);
+}
+
+/* --- CART STYLING --- */
+.cart-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- CART LIST --- */
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f8f8;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-info {
+    text-align: left;
+}
+
+.cart-price {
+    font-size: 18px;
+    color: #27ae60;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.cart-quantity {
+    font-size: 14px;
+    color: #666;
+}
+
+/* --- REMOVE BUTTON --- */
+.remove-button {
+    background-color: #e74c3c;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.remove-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* --- CART ACTION BUTTONS (EMPTY & BACK) --- */
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.clear-cart-button {
+    background-color: #e74c3c;
+    padding: 12px 18px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-cart-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.cart-button {
+    background-color: #3498db;
+    padding: 12px 18px;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* --- EMPTY CART MESSAGE --- */
+.empty-cart {
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .nav-menu li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        display: none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        position: absolute;
+    }
+
+    .cart-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Toast Notification Customization */
+.toast {
+    font-size: 16px !important;
+    text-align: center !important;
+}

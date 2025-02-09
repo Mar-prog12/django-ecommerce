@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Product Catalog{% endblock %}
+
+{% block content %}
+    <h2>Product Catalog</h2>
+
+    <div class="container">
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="product-image">
+                {% endif %}
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p class="price">${{ product.price }}</p>
+                <a href="{% url 'add_to_cart' product.id %}" class="button add-to-cart" data-product="{{ product.name }}">Add to Cart</a>
+            </div>
+        {% empty %}
+            <p class="empty-message">No products available at the moment.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

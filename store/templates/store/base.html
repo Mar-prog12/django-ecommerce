@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My E-Commerce{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}">
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Toast Notification CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Include Toast Notification JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+<script>
+    $(document).ready(function() {
+        $(".add-to-cart").click(function(event) {
+            event.preventDefault();  // Prevent default link behavior
+            var productName = $(this).data("product");
+
+            // Show toast notification
+            toastr.success(productName + " added to cart!", "Success");
+
+            // Redirect after a short delay
+            var url = $(this).attr("href");
+            setTimeout(function() {
+                window.location.href = url;
+            }, 1500);
+        });
+
+        $(".remove-button").click(function(event) {
+            event.preventDefault();
+            var productName = $(this).data("product");
+            toastr.warning(productName + " removed from cart", "Removed");
+
+            var url = $(this).attr("href");
+            setTimeout(function() {
+                window.location.href = url;
+            }, 1500);
+        });
+    });
+</script>
+
+<body>
+
+    <!-- HEADER -->
+   <header class="header">
+    <div class="header-container">
+        <h1 class="site-title">
+            <a href="{% url 'product_list' %}">My E-Commerce</a>
+        </h1>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="{% url 'product_list' %}">Home</a></li>
+                <li><a href="{% url 'view_cart' %}">Cart</a></li>
+                <li class="dropdown">
+                    <a href="#">Categories ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'product_list' %}">All Products</a></li>
+                        {% for category in categories %}
+                            <li><a href="{% url 'product_list' %}?category={{ category.id }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2024 My E-Commerce | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
