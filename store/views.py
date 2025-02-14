@@ -1,6 +1,8 @@
 
 from django.shortcuts import render, redirect
 from .models import Product
+from django.core.mail import send_mail
+from django.contrib import messages
 
 def product_list(request):
     """Display products, filtered by category if selected."""
@@ -69,3 +71,23 @@ def categories_context(request):
     categories = Category.objects.all()
     return {'categories': categories}
 
+
+def contact_page(request):
+    """Handles Contact Form Submission"""
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Send email (Replace with your email settings)
+        send_mail(
+            f"New Contact Message from {name}",
+            message,
+            email,
+            ['marjola.dardha@gmail.com'],  # Change to your business email
+            fail_silently=False,
+        )
+
+        messages.success(request, "Your message has been sent!")
+
+    return render(request, "store/contact.html")
