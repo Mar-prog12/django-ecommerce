@@ -5,21 +5,28 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 
+
 def product_list(request):
-    """Display products, filtered by category if selected."""
-    category_id = request.GET.get('category')  # Get category ID from URL query parameters
+    query = request.GET.get('q', '')  # Get search query
+    category_filter = request.GET.get('category', '')  # Get selected category
+
     products = Product.objects.all()
 
-    if category_id:
-        products = products.filter(category_id=category_id)
+    if category_filter:
+        products = products.filter(category__name__iexact=category_filter.strip())  # Case-insensitive and strip spaces
 
-    categories = Category.objects.all()  # Fetch categories for the dropdown
+    if query:
+        products = products.filter(name__icontains=query)
 
-    return render(request, 'store/product_list.html', {
-        'products': products,
-        'categories': categories,
-        'selected_category': int(category_id) if category_id else None
+    categories = Category.objects.all()  # Get all categories
+
+    return render(request, "store/product_list.html", {
+        "products": products,
+        "categories": categories,
+        "selected_category": category_filter,
+        "query": query
     })
+
 
 def search_products(request):
     query = request.GET.get('q', '')
@@ -97,12 +104,3 @@ def contact_page(request):
 
     return render(request, "store/contact.html")
 
-def product_list(request):
-    query = request.GET.get('q', '')  # Get search query from URL parameter
-    products = Product.objects.all()
-
-    if query:
-        products = products.filter(name__icontains=query)  # Search by product name
-
-    categories = Category.objects.all()  # For filtering by category
-    return render(request, "store/product_list.html", {"products": products, "categories": categories, "query": query})
