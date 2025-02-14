@@ -5,6 +5,11 @@
 {% block content %}
     <h2>Product Catalogue</h2>
 
+    <form method="GET" action="{% url 'product_list' %}">
+        <input type="text" name="q" placeholder="Search products..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
     <div class="container">
         {% for product in products %}
             <div class="product-card">
@@ -21,3 +26,19 @@
         {% endfor %}
     </div>
 {% endblock %}
+{% if products %}
+    <h2>Search Results</h2>
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>${{ product.price }}</p>
+                <a href="{% url 'product_detail' product.id %}">View Details</a>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No products found for "{{ query }}". Try searching again.</p>
+{% endif %}
+

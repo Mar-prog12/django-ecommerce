@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
@@ -96,3 +96,13 @@ def contact_page(request):
             messages.error(request, f"Error sending message: {e}")
 
     return render(request, "store/contact.html")
+
+def product_list(request):
+    query = request.GET.get('q', '')  # Get search query from URL parameter
+    products = Product.objects.all()
+
+    if query:
+        products = products.filter(name__icontains=query)  # Search by product name
+
+    categories = Category.objects.all()  # For filtering by category
+    return render(request, "store/product_list.html", {"products": products, "categories": categories, "query": query})
